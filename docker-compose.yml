@@ -2,9 +2,7 @@ version: '3.8'
 
 services:
   gatus:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: twinproduction/gatus:latest
     container_name: gatus
     restart: unless-stopped
     ports:
