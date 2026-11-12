@@ -6,21 +6,21 @@ endpoints:
   # =========================================================================
   # 1. PHYSICAL VPS CONNECTIVITY (ICMP PING)
   # =========================================================================
-  - name: "VPS 1 - Infrastructure"
+  - name: "VPS 1 - Infrastructure Ping"
     group: "Servers (ICMP)"
     url: "icmp://62.169.27.8"
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
 
-  - name: "VPS 2 - Demo & Mail"
+  - name: "VPS 2 - Demo & Mail Ping"
     group: "Servers (ICMP)"
     url: "icmp://161.97.83.45"
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
 
-  - name: "VPS 3 - Clients Production"
+  - name: "VPS 3 - Clients Production Ping"
     group: "Servers (ICMP)"
     url: "icmp://161.97.165.50"
     interval: 1m
@@ -28,7 +28,31 @@ endpoints:
       - "[CONNECTED] == true"
 
   # =========================================================================
-  # 2. VPS 1 - CORE PLATFORM & INFRASTRUCTURE CONTAINERS
+  # 2. SERVER REMOTE ACCESS (SSH PORTS)
+  # =========================================================================
+  - name: "VPS 1 - SSH Access (Port 4155)"
+    group: "Servers Access (SSH)"
+    url: "tcp://62.169.27.8:4155"
+    interval: 2m
+    conditions:
+      - "[CONNECTED] == true"
+
+  - name: "VPS 2 - SSH Access (Port 22)"
+    group: "Servers Access (SSH)"
+    url: "tcp://161.97.83.45:22"
+    interval: 2m
+    conditions:
+      - "[CONNECTED] == true"
+
+  - name: "VPS 3 - SSH Access (Port 4155)"
+    group: "Servers Access (SSH)"
+    url: "tcp://161.97.165.50:4155"
+    interval: 2m
+    conditions:
+      - "[CONNECTED] == true"
+
+  # =========================================================================
+  # 3. VPS 1 - CORE PLATFORM & INFRASTRUCTURE CONTAINERS
   # =========================================================================
   - name: "Coolify Management Panel"
     group: "VPS 1 - Infrastructure"
@@ -68,7 +92,7 @@ endpoints:
       - "[CERTIFICATE_EXPIRATION] > 72h"
 
   # =========================================================================
-  # 3. VPS 2 - MAIL & APPLICATION CONTAINERS
+  # 4. VPS 2 - MAIL & APPLICATION CONTAINERS
   # =========================================================================
   - name: "Stalwart IMAPS (Port 993)"
     group: "VPS 2 - Mail & Apps"
@@ -99,7 +123,7 @@ endpoints:
       - "[CONNECTED] == true"
 
   # =========================================================================
-  # 4. VPS 3 - BACKEND & DATABASE CONTAINERS
+  # 5. VPS 3 - BACKEND & DATABASE CONTAINERS
   # =========================================================================
   - name: "PostgreSQL Database (Port 5641)"
     group: "VPS 3 - Backends & DBs"
@@ -137,60 +161,67 @@ endpoints:
       - "[CONNECTED] == true"
 
   # =========================================================================
-  # 5. VPS 3 - PRODUCTION CLIENT WEBSITES
+  # 6. VPS 3 - PRODUCTION CLIENT WEBSITES & SSL HEALTH
   # =========================================================================
   - name: "Clean Auto Services"
-    group: "VPS 3 - Client Websites"
+    group: "VPS 3 - Client Websites (SSL & Speed)"
     url: "https://cleanautoservices.fr"
     interval: 3m
     conditions:
       - "[STATUS] == 200"
       - "[CERTIFICATE_EXPIRATION] > 72h"
+      - "[RESPONSE_TIME] < 2000"
 
   - name: "Luxury Car Transport 24"
-    group: "VPS 3 - Client Websites"
+    group: "VPS 3 - Client Websites (SSL & Speed)"
     url: "https://luxurycartransport24.com"
     interval: 3m
     conditions:
       - "[STATUS] == 200"
       - "[CERTIFICATE_EXPIRATION] > 72h"
+      - "[RESPONSE_TIME] < 2000"
 
   - name: "Prestigia Cars"
-    group: "VPS 3 - Client Websites"
+    group: "VPS 3 - Client Websites (SSL & Speed)"
     url: "https://prestigiacars.ch"
     interval: 3m
     conditions:
       - "[STATUS] == 200"
       - "[CERTIFICATE_EXPIRATION] > 72h"
+      - "[RESPONSE_TIME] < 2000"
 
   - name: "SOL SPC PRO"
-    group: "VPS 3 - Client Websites"
+    group: "VPS 3 - Client Websites (SSL & Speed)"
     url: "https://solspcpro.fr"
     interval: 3m
     conditions:
       - "[STATUS] == 200"
       - "[CERTIFICATE_EXPIRATION] > 72h"
+      - "[RESPONSE_TIME] < 2000"
 
   - name: "AA Motors"
-    group: "VPS 3 - Client Websites"
+    group: "VPS 3 - Client Websites (SSL & Speed)"
     url: "https://aa-motors.fr"
     interval: 3m
     conditions:
       - "[STATUS] == 200"
       - "[CERTIFICATE_EXPIRATION] > 72h"
+      - "[RESPONSE_TIME] < 2000"
 
   - name: "AB Performance"
-    group: "VPS 3 - Client Websites"
+    group: "VPS 3 - Client Websites (SSL & Speed)"
     url: "https://ab-performance.ch"
     interval: 3m
     conditions:
       - "[STATUS] == 200"
       - "[CERTIFICATE_EXPIRATION] > 72h"
+      - "[RESPONSE_TIME] < 2000"
 
   - name: "Ouzouri Car Wash"
-    group: "VPS 3 - Client Websites"
+    group: "VPS 3 - Client Websites (SSL & Speed)"
     url: "https://ouzouricarwash.fr"
     interval: 3m
     conditions:
       - "[STATUS] == 200"
       - "[CERTIFICATE_EXPIRATION] > 72h"
+      - "[RESPONSE_TIME] < 2000"
