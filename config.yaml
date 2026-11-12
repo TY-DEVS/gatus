@@ -91,6 +91,15 @@ endpoints:
       - "[STATUS] == 200"
       - "[CERTIFICATE_EXPIRATION] > 72h"
 
+  - name: "TY-DEV CRM Portal"
+    group: "VPS 1 - Infrastructure"
+    url: "https://app.ty-dev.site"
+    interval: 2m
+    conditions:
+      - "[STATUS] == 200 || [STATUS] == 302"
+      - "[CERTIFICATE_EXPIRATION] > 72h"
+      - "[RESPONSE_TIME] < 2000"
+
   # =========================================================================
   # 4. VPS 2 - MAIL & APPLICATION CONTAINERS
   # =========================================================================
@@ -220,6 +229,15 @@ endpoints:
   - name: "Ouzouri Car Wash"
     group: "VPS 3 - Client Websites (SSL & Speed)"
     url: "https://ouzouricarwash.fr"
+    interval: 3m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 72h"
+      - "[RESPONSE_TIME] < 2000"
+
+  - name: "Les Dépanneurs Parisiens"
+    group: "VPS 3 - Client Websites (SSL & Speed)"
+    url: "https://les-depanneurs-parisiens.fr"
     interval: 3m
     conditions:
       - "[STATUS] == 200"
