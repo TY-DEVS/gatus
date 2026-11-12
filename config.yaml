@@ -73,6 +73,8 @@ endpoints:
     group: "VPS 1 - Infrastructure"
     url: "https://netdata.ty-dev.site"
     interval: 2m
+    headers:
+      Authorization: "Basic YWRtaW46VHlEZXZAU2VjdXJlMjAyNiE="
     conditions:
       - "[STATUS] == 200"
 
