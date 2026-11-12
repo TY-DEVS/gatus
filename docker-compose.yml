@@ -1,8 +1,14 @@
-version: '3.8'
-
 services:
   gatus:
     image: twinproduction/gatus:latest
     restart: unless-stopped
     expose:
       - "8080"
+    volumes:
+      - /bin/busybox:/bin/busybox:ro
+    healthcheck:
+      test: ["CMD", "/bin/busybox", "wget", "--spider", "-q", "http://127.0.0.1:8080/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
