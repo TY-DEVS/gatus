@@ -7,9 +7,13 @@ services:
     volumes:
       - /bin/busybox:/bin/busybox:ro
       - ./config.yaml:/config/config.yaml:ro
+      - gatus_data:/data
     healthcheck:
       test: ["CMD", "/bin/busybox", "wget", "--spider", "-q", "http://127.0.0.1:8080/health"]
       interval: 30s
       timeout: 5s
       retries: 3
       start_period: 10s
+
+volumes:
+  gatus_data:
