@@ -1,53 +1,175 @@
+alerting:
+  # Configure your preferred alert provider (Discord, Telegram, Slack, or Email)
+  # Example for Telegram:
+  # telegram:
+  #   token: "YOUR_TELEGRAM_BOT_TOKEN"
+  #   chat-id: "YOUR_TELEGRAM_CHAT_ID"
+  #   default-alert:
+  #     enabled: true
+  #     send-on-resolved: true
+
 endpoints:
-  - name: front-end
-    group: core
-    url: "https://twin.sh/health"
-    interval: 5m
-    conditions:
-      - "[STATUS] == 200"
-      - "[BODY].status == UP"
-      - "[RESPONSE_TIME] < 150"
-
-  - name: back-end
-    group: core
-    url: "https://example.org/"
-    interval: 5m
-    conditions:
-      - "[STATUS] == 200"
-      - "[CERTIFICATE_EXPIRATION] > 48h"
-
-  - name: monitoring
-    group: internal
-    url: "https://example.org/"
-    interval: 5m
-    conditions:
-      - "[STATUS] == 200"
-
-  - name: nas
-    group: internal
-    url: "https://example.org/"
-    interval: 5m
-    conditions:
-      - "[STATUS] == 200"
-
-  - name: example-dns-query
-    url: "8.8.8.8" # Address of the DNS server to use
-    interval: 5m
-    dns:
-      query-name: "example.com"
-      query-type: "A"
-    conditions:
-      - "[BODY] == pat(*.*.*.*)"  # Matches any IPv4 address
-      - "[DNS_RCODE] == NOERROR"
-
-  - name: icmp-ping
-    url: "icmp://example.org"
+  # =========================================================================
+  # 1. PHYSICAL VPS CONNECTIVITY (ICMP PING)
+  # =========================================================================
+  - name: "VPS 1 - Infrastructure"
+    group: "Servers"
+    url: "icmp://62.169.27.8"
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
 
-  - name: check-domain-expiration
-    url: "https://example.org/"
-    interval: 1h
+  - name: "VPS 2 - Demo & Mail"
+    group: "Servers"
+    url: "icmp://161.97.83.45"
+    interval: 1m
     conditions:
-      - "[DOMAIN_EXPIRATION] > 720h"
+      - "[CONNECTED] == true"
+
+  - name: "VPS 3 - Clients Production"
+    group: "Servers"
+    url: "icmp://161.97.165.50"
+    interval: 1m
+    conditions:
+      - "[CONNECTED] == true"
+
+  # =========================================================================
+  # 2. CORE PLATFORM & INFRASTRUCTURE SERVICES (VPS 1)
+  # =========================================================================
+  - name: "Coolify Management Panel"
+    group: "VPS 1 - Infrastructure"
+    url: "https://coolify.ty-dev.site"
+    interval: 2m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 72h"
+
+  - name: "Netdata Dashboard"
+    group: "VPS 1 - Infrastructure"
+    url: "https://netdata.ty-dev.site"
+    interval: 2m
+    conditions:
+      - "[STATUS] == 200"
+
+  - name: "TY-DEV Main Portal"
+    group: "VPS 1 - Infrastructure"
+    url: "https://ty-dev.site"
+    interval: 2m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 72h"
+
+  - name: "GrowCRM App"
+    group: "VPS 1 - Infrastructure"
+    url: "https://app.ty-dev.site"
+    interval: 3m
+    conditions:
+      - "[STATUS] == 200"
+
+  # =========================================================================
+  # 3. MAIL INFRASTRUCTURE (VPS 2)
+  # =========================================================================
+  - name: "Stalwart Mail Web Admin"
+    group: "VPS 2 - Mail Services"
+    url: "https://mail.ty-dev.tech"
+    interval: 2m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 72h"
+
+  - name: "Stalwart SMTP Submission (Port 465)"
+    group: "VPS 2 - Mail Services"
+    url: "tcp://161.97.83.45:465"
+    interval: 2m
+    conditions:
+      - "[CONNECTED] == true"
+
+  - name: "Stalwart IMAPS (Port 993)"
+    group: "VPS 2 - Mail Services"
+    url: "tcp://161.97.83.45:993"
+    interval: 2m
+    conditions:
+      - "[CONNECTED] == true"
+
+  # =========================================================================
+  # 4. PRODUCTION CLIENT SITES (VPS 3)
+  # =========================================================================
+  - name: "Abu Dhabi Airport Transfers"
+    group: "VPS 3 - Clients Production"
+    url: "https://abudhabiairporttransfers.com"
+    interval: 5m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 72h"
+
+  - name: "Clean Auto Services"
+    group: "VPS 3 - Clients Production"
+    url: "https://cleanautoservices.fr"
+    interval: 5m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 72h"
+
+  - name: "Les Epavistes Parisiens"
+    group: "VPS 3 - Clients Production"
+    url: "https://les-epavistes-parisiens.fr"
+    interval: 5m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 72h"
+
+  - name: "Luxury Car Transport 24"
+    group: "VPS 3 - Clients Production"
+    url: "https://luxurycartransport24.com"
+    interval: 5m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 72h"
+
+  - name: "Prestigia Cars"
+    group: "VPS 3 - Clients Production"
+    url: "https://prestigiacars.ch"
+    interval: 5m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 72h"
+
+  - name: "SOL SPC PRO"
+    group: "VPS 3 - Clients Production"
+    url: "https://solspcpro.fr"
+    interval: 5m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 72h"
+
+  - name: "AA Motors"
+    group: "VPS 3 - Clients Production"
+    url: "https://aa-motors.fr"
+    interval: 5m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 72h"
+
+  - name: "AB Performance"
+    group: "VPS 3 - Clients Production"
+    url: "https://ab-performance.ch"
+    interval: 5m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 72h"
+
+  - name: "Les Depanneurs Parisiens"
+    group: "VPS 3 - Clients Production"
+    url: "https://les-depanneurs-parisiens.fr"
+    interval: 5m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 72h"
+
+  - name: "Ouzouri Car Wash"
+    group: "VPS 3 - Clients Production"
+    url: "https://ouzouricarwash.fr"
+    interval: 5m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 72h"
