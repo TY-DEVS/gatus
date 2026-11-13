@@ -26,6 +26,9 @@ endpoints:
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
+    alerts:
+      - type: email
+        enabled: true
 
   - name: "VPS 2 - Demo & Mail Ping"
     group: "Servers (ICMP)"
@@ -33,6 +36,9 @@ endpoints:
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
+    alerts:
+      - type: email
+        enabled: true
 
   - name: "VPS 3 - Clients Production Ping"
     group: "Servers (ICMP)"
@@ -40,6 +46,9 @@ endpoints:
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
+    alerts:
+      - type: email
+        enabled: true
 
   # =========================================================================
   # 2. SERVER REMOTE ACCESS (SSH PORTS)
@@ -50,6 +59,9 @@ endpoints:
     interval: 2m
     conditions:
       - "[CONNECTED] == true"
+    alerts:
+      - type: email
+        enabled: true
 
   - name: "VPS 2 - SSH Access (Port 22)"
     group: "Servers Access (SSH)"
@@ -57,6 +69,9 @@ endpoints:
     interval: 2m
     conditions:
       - "[CONNECTED] == true"
+    alerts:
+      - type: email
+        enabled: true
 
   - name: "VPS 3 - SSH Access (Port 4155)"
     group: "Servers Access (SSH)"
@@ -64,6 +79,9 @@ endpoints:
     interval: 2m
     conditions:
       - "[CONNECTED] == true"
+    alerts:
+      - type: email
+        enabled: true
 
   # =========================================================================
   # 3. VPS 1 - CORE PLATFORM & INFRASTRUCTURE CONTAINERS
@@ -114,7 +132,7 @@ endpoints:
     conditions:
       - "[STATUS] == 200 || [STATUS] == 302"
       - "[CERTIFICATE_EXPIRATION] > 72h"
-      - "[RESPONSE_TIME] < 2000"
+      - "[RESPONSE_TIME] < 5000"
 
   # =========================================================================
   # 4. VPS 2 - MAIL & APPLICATION CONTAINERS
@@ -196,6 +214,9 @@ endpoints:
       - "[STATUS] == 200"
       - "[CERTIFICATE_EXPIRATION] > 72h"
       - "[RESPONSE_TIME] < 2000"
+    alerts:
+      - type: email
+        enabled: true
 
   - name: "Luxury Car Transport 24"
     group: "VPS 3 - Client Websites (SSL & Speed)"
@@ -205,6 +226,9 @@ endpoints:
       - "[STATUS] == 200"
       - "[CERTIFICATE_EXPIRATION] > 72h"
       - "[RESPONSE_TIME] < 2000"
+    alerts:
+      - type: email
+        enabled: true
 
   - name: "Prestigia Cars"
     group: "VPS 3 - Client Websites (SSL & Speed)"
@@ -214,6 +238,9 @@ endpoints:
       - "[STATUS] == 200"
       - "[CERTIFICATE_EXPIRATION] > 72h"
       - "[RESPONSE_TIME] < 2000"
+    alerts:
+      - type: email
+        enabled: true
 
   - name: "SOL SPC PRO"
     group: "VPS 3 - Client Websites (SSL & Speed)"
@@ -223,6 +250,9 @@ endpoints:
       - "[STATUS] == 200"
       - "[CERTIFICATE_EXPIRATION] > 72h"
       - "[RESPONSE_TIME] < 2000"
+    alerts:
+      - type: email
+        enabled: true
 
   - name: "AA Motors"
     group: "VPS 3 - Client Websites (SSL & Speed)"
@@ -232,6 +262,9 @@ endpoints:
       - "[STATUS] == 200"
       - "[CERTIFICATE_EXPIRATION] > 72h"
       - "[RESPONSE_TIME] < 2000"
+    alerts:
+      - type: email
+        enabled: true
 
   - name: "AB Performance"
     group: "VPS 3 - Client Websites (SSL & Speed)"
@@ -241,6 +274,9 @@ endpoints:
       - "[STATUS] == 200"
       - "[CERTIFICATE_EXPIRATION] > 72h"
       - "[RESPONSE_TIME] < 2000"
+    alerts:
+      - type: email
+        enabled: true
 
   - name: "Ouzouri Car Wash"
     group: "VPS 3 - Client Websites (SSL & Speed)"
@@ -250,6 +286,9 @@ endpoints:
       - "[STATUS] == 200"
       - "[CERTIFICATE_EXPIRATION] > 72h"
       - "[RESPONSE_TIME] < 2000"
+    alerts:
+      - type: email
+        enabled: true
 
   - name: "Les Dépanneurs Parisiens"
     group: "VPS 3 - Client Websites (SSL & Speed)"
@@ -259,3 +298,6 @@ endpoints:
       - "[STATUS] == 200"
       - "[CERTIFICATE_EXPIRATION] > 72h"
       - "[RESPONSE_TIME] < 2000"
+    alerts:
+      - type: email
+        enabled: true
