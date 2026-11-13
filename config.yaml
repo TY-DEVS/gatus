@@ -146,6 +146,30 @@ endpoints:
       - type: email
         enabled: true
 
+  - name: "TY-DEV CrowdSec Security Dashboard"
+    group: "VPS 1 - Infrastructure"
+    url: "https://security.ty-dev.site"
+    interval: 2m
+    conditions:
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 72h"
+      - "[RESPONSE_TIME] < 2000"
+    alerts:
+      - type: email
+        enabled: true
+
+  - name: "TY-DEV CrowdSec API Health"
+    group: "VPS 1 - Infrastructure"
+    url: "https://security.ty-dev.site/api/health"
+    interval: 2m
+    conditions:
+      - "[STATUS] == 200"
+      - "[BODY].status == ok"
+      - "[RESPONSE_TIME] < 2000"
+    alerts:
+      - type: email
+        enabled: true
+
   # =========================================================================
   # 4. VPS 2 - MAIL & APPLICATION CONTAINERS
   # =========================================================================
