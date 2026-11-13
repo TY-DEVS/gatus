@@ -4,12 +4,12 @@ storage:
 
 alerting:
   email:
-    from: "contact@navicab.fr"
+    from: "contact@ty-dev.site"
     to: "contact.tydev@gmail.com"
-    host: "mail73.lwspanel.com"
+    host: "mail81.lwspanel.com"
     port: 465
-    username: "contact@navicab.fr"
-    password: "vF7*yjHq$5dVpDx"
+    username: "contact@ty-dev.site"
+    password: "mW4@B*NHEPP9szv"
     default-alert:
       enabled: true
       failure-threshold: 3
