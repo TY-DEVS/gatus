@@ -2,6 +2,20 @@ storage:
   type: sqlite
   path: /data/data.db
 
+alerting:
+  email:
+    from: "contact@navicab.fr"
+    to: "bymouti@gmail.com"
+    host: "mail73.lwspanel.com"
+    port: 465
+    username: "contact@navicab.fr"
+    password: "vF7*yjHq$5dVpDx"
+    default-alert:
+      enabled: true
+      failure-threshold: 3
+      success-threshold: 2
+      send-on-resolved: true
+
 endpoints:
   # =========================================================================
   # 1. PHYSICAL VPS CONNECTIVITY (ICMP PING)
